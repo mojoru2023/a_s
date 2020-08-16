@@ -1,0 +1,23 @@
+
+
+
+
+
+
+净利润  （新浪股票）
+http://vip.stock.finance.sina.com.cn/corp/view/vFD_FinanceSummaryHistory.php?stockid=000651&type=NETPROFIT&cate=liru0
+
+
+
+营业利润率（新浪股票）
+http://vip.stock.finance.sina.com.cn/corp/view/vFD_FinancialGuideLineHistory.php?stockid=600256&typecode=financialratios30
+
+
+股本结构（新浪股票）
+http://vip.stock.finance.sina.com.cn/corp/go.php/vCI_StockStructureHistory/stockid/600256/stocktype/TotalStock.phtml
+
+
+业绩预告（中报）预告（新浪股票）
+
+http://vip.stock.finance.sina.com.cn/q/go.php/vFinanceAnalyze/kind/performance/index.phtml?s_i=&s_a=&s_c=&s_type=%D4%A4%D4%F6&reportdate=2018&quarter=2&p=1
+

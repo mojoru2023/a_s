@@ -1,0 +1,54 @@
+
+
+# 也是从3个表同时查询(两个数据表，代码相同然后计算收益率，一个最新的数据表的代码与板块，市值要一样！)
+
+
+
+# 将查询结果插入新表
+insert  into as_search(name,ap,pr,fl_value,type,code)
+select  distinct as1009.name, as1009.now_price as a_p ,CONCAT(TRUNCATE((as1009.now_price -as1006.now_price)/as1006.now_price*100,2),'%') as pr,
+ as_fvalue_type.fl_value,as_fvalue_type.type ,as_fvalue_type.code
+from  as1006,as1009,as_fvalue_type  where as1006.code=as1009.code  and as_fvalue_type.code =as1009.code and fl_value >88  order by pr desc limit 30;;
+
+
+# 只是并表查询(剔除重复名，市值大于88)
+
+select  distinct as1009.name, as1009.now_price as a_p ,CONCAT(TRUNCATE((as1009.now_price -as1006.now_price)/as1006.now_price*100,2),'%') as pr,
+ as_fvalue_type.fl_value,as_fvalue_type.type ,as_fvalue_type.code
+from  as1006,as1009,as_fvalue_type  where as1006.code=as1009.code  and as_fvalue_type.code =as1009.code and fl_value >88  order by pr desc limit 30;
+
+
+
+# 查询特定板块，并安收益率排序
+
+
+select distinct as1009.name, as1009.now_price as a_p ,CONCAT(TRUNCATE((as1009.now_price -as1006.now_price)/as1006.now_price*100,2),'%') as pr,
+ as_fvalue_type.fl_value as flv,as_fvalue_type.type 
+from  as1006,as1009,as_fvalue_type  where as1006.code=as1009.code  and as_fvalue_type.code =as1009.code and type in ("酿酒行业","医药制造") order by flv desc limit 20;
+
+alter table as1009 column  float ;
+
+
+
+
+# 修改市值的字段类型
+
+alter table as_fvalue_type modify  column fl_value decimal(10,2) ;
+
+
+
+
+create table as_search(
+id int not null primary key auto_increment,
+name varchar(10),
+ap varchar(10),
+pr varchar(10),
+fl_value varchar(10),
+type varchar(50),
+code varchar(10),
+UNIQUE name  //剔除重复项
+) engine=InnoDB  charset=utf8;
+
+
+
+

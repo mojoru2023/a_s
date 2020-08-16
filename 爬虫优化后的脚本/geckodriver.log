@@ -1,0 +1,20 @@
+1557195965747	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.7Suj1JvIiG4f"
+JavaScript error: jar:file:///usr/lib/firefox/omni.ja!/components/addonsInfo.js, line 91: SyntaxError: "0"-prefixed octal literals and octal escape sequences are deprecated; for octal literals use the "0o" prefix instead
+1557195978094	Marionette	INFO	Listening on port 46607
+1557195978136	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: http://hqres.eastmoney.com/emag14/js/TopSpeedQuote.min.js, line 1928: unreachable code after return statement
+JavaScript warning: http://hqres.eastmoney.com/emag14/js/TopSpeedQuote.min.js, line 1928: unreachable code after return statement
+JavaScript error: http://emcharts.dfcfw.com/ec/2.2.4/emcharts.min.js, line 8: NS_ERROR_FAILURE: 
+*** UTM:SVC TimerManager:registerTimer called after profile-before-change notification. Ignoring timer registration for id: telemetry_modules_ping
+1557196016514	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.y8waSR5xedmf"
+JavaScript error: jar:file:///usr/lib/firefox/omni.ja!/components/addonsInfo.js, line 91: SyntaxError: "0"-prefixed octal literals and octal escape sequences are deprecated; for octal literals use the "0o" prefix instead
+1557196021478	Marionette	INFO	Listening on port 36749
+1557196021548	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: http://hqres.eastmoney.com/emag14/js/TopSpeedQuote.min.js, line 1928: unreachable code after return statement
+JavaScript error: http://emcharts.dfcfw.com/ec/2.2.4/emcharts.min.js, line 8: NS_ERROR_FAILURE: 
+JavaScript warning: http://hqres.eastmoney.com/emag14/js/TopSpeedQuote.min.js, line 1928: unreachable code after return statement
+*** UTM:SVC TimerManager:registerTimer called after profile-before-change notification. Ignoring timer registration for id: telemetry_modules_ping
+1557196057721	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.ip43iVaOJw62"
+JavaScript error: jar:file:///usr/lib/firefox/omni.ja!/components/addonsInfo.js, line 91: SyntaxError: "0"-prefixed octal literals and octal escape sequences are deprecated; for octal literals use the "0o" prefix instead
+1557196062100	Marionette	INFO	Listening on port 44951
+1557196062146	Marionette	WARN	TLS certificate errors will be ignored for this session

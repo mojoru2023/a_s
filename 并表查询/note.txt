@@ -1,0 +1,141 @@
+SQL的连表查询
+连接查询包括合并、内连接、外连接和交叉连接
+
+1、Union
+UNION 操作符用于合并两个或多个 SELECT 语句的结果集。
+
+UNION 运算符通过组合其他两个结果表（例如 TABLE1 和 TABLE2）并消去表中任何重复行而派生出一个结果表。
+
+当 ALL 随 UNION 一起使用时（即 UNION ALL），不消除重复行。两种情况下，派生表的每一行不是来自 TABLE1 就是来自 TABLE2。
+
+注意：使用UNION时，两张表查询的结果有相同数量的列、列类型相似。
+
+
+1）基本UNION查询，查询学校教师、学生的总的信息表，包括ID和姓名
+
+SELECT ID,Name FROM Students
+UNION
+SELECT ID,Name FROM Teachers
+
+
+2)带条件的UNION查询，也可以查询同一张表，查询年龄为18，23岁的学生信息
+
+SELECT ID,Name FROM Student WHERE Age=18
+UNION
+SELECT ID,Name FROM Student WHERE Age=23
+
+3）查询教师学生全部姓名
+
+ 因为UNION只会选择不同的值，如果学生中和教师中有重名的情况，这就需要UNION ALL
+
+SELECT Name FROM Students
+UNION ALL
+SELECT Name FROM Teachers
+
+
+2、INNER JOIN（内连接）
+INNER JOIN（内连接），也成为自然连接
+
+作用：根据两个或多个表中的列之间的关系，从这些表中查询数据。
+
+注意: 内连接是从结果中删除其他被连接表中没有匹配行的所有行，所以内连接可能会丢失信息。
+
+重点：内连接，只查匹配行。
+
+语法：(INNER可省略)
+
+SELECT fieldlist
+FROM table1 [INNER] join table2
+ON table1.column=table2.column
+
+实例：查询学生信息，包括ID,姓名、专业名称
+
+SELECT Students.ID,Students.Name,Majors.Name AS MajorName
+FROM Students INNER JOIN Majors
+ON Students.MajorID = Majors.ID
+
+但是，inner join也会产生重复数据。如果将Majors表的主键约束去掉，可以插入重复的ID，如：
+
+
+3、外连接
+与内连接相比，即使没有匹配行，也会返回一个表的全集。
+
+外连接分为三种：左外连接，右外连接，全外连接。对应SQL：LEFT/RIGHT/FULL OUTER JOIN。通常我们省略outer 这个关键字。写成：LEFT/RIGHT/FULL JOIN。
+
+重点：至少有一方保留全集，没有匹配行用NULL代替。
+
+1）LEFT OUTER JOIN，简称LEFT JOIN，左外连接（左连接）
+
+结果集保留左表的所有行，但只包含第二个表与第一表匹配的行。第二个表相应的空行被放入NULL值。
+
+依然沿用内链接的例子
+
+（1）使用左连接查询学生的信息，其中包括学生ID，学生姓名和专业名称。
+
+ 结论：
+
+通过结果，我们可以看到左连接包含了第一张表的所有信息，在第二张表中如果没有匹配项，则用NULL代替。 
+
+2）RIGHT JOIN(right outer join)右外连接(右连接)
+
+右外连接保留了第二个表的所有行，但只包含第一个表与第二个表匹配的行。第一个表相应空行被入NULL值。
+
+右连接与左连接思想类似。只是第二张保留全集，如果第一张表中没有匹配项，用NULL代替
+
+依然沿用内链接的例子，只是改为右连接
+
+（1）使用右连接查询学生的信息，其中包括学生ID，学生姓名和专业名称。
+
+SELECT Students.ID,Students.Name,Majors.Name AS MajorName
+FROM Students RIGHT JOIN Majors
+ON Students.MajorID = Majors.ID
+
+3）FULL JOIN (FULL OUTER JOIN，全外连接）
+
+全外连接，简称：全连接。会把两个表所有的行都显示在结果表中
+
+1)使用全连接查询学生的信息，其中包括学生ID，学生姓名和专业名称。
+
+SELECT Students.ID,Students.Name,Majors.Name AS MajorName
+FROM Students FULL JOIN Majors
+ON Students.MajorID = Majors.ID
+
+4、CROSS JOIN（交叉连接）
+交叉连接。交叉连接返回左表中的所有行，左表中的每一行与右表中的所有行组合。交叉连接也称作笛卡尔积。 
+
+简单查询两张表组合，这是求笛卡儿积，效率最低。
+
+笛卡儿积：笛卡尔乘积，也叫直积。假设集合A={a,b}，集合B={0,1,2}，则两个集合的笛卡尔积为{(a,0),(a,1),(a,2),(b,0),(b,1), (b,2)}。可以扩展到多个集合的情况。类似的例子有，如果A表示某学校学生的集合，B表示该学校所有课程的集合，则A与B的笛卡尔积表示所有可能的选课情况。
+
+1）交叉连接查询学生的信息，其中包括学生ID，学生姓名和专业名称。
+
+SELECT Students.ID,Students.Name,Majors.Name AS MajorName
+FROM Students CROSS JOIN Majors
+
+2）查询多表，其实也是笛卡儿积，与CROSS JOIN等价，以下查询同上述结果一样。
+
+这个可能很常见，但是大家一定要注意了，这样就查询了两张表中所有组合的全集。
+
+SELECT Students.ID,Students.Name,Majors.Name AS MajorName
+FROM Students,Majors
+3）加了查询条件
+
+注意:在使用CROSS JOIN关键字交叉连接表时，因为生成的是两个表的笛卡尔积，因而不能使用ON关键字，只能在WHERE子句中定义搜索条件。
+
+SELECT Students.ID,Students.Name,Majors.Name AS MajorName
+FROM Students CROSS JOIN Majors
+WHERE Students.MajorID = Majors.ID
+
+#表和字段对应要非常明确
+1.LEFT JOIN 必须大写
+ SELECT code_netProfits.code,code_netProfits.name,a_stock.code_type,code_netProfits.v1,code_netProfits.v2,code_netProfits.v3,code_netProfits.v4,code_type.ty a_stock.code_netProfits LEFT JOIN a_stock.code_type  on code_type.code =code_netProfits.code;
+
+insert into table_Finances(code,name,v1,v2,v3,v4,type)
+SELECT code_netProfits.code,code_netProfits.name,code_type.type,code_netProfits.v1,code_netProfits.v2,code_netProfits.v3,code_netProfits.v4
+FROM a_stock.code_netProfits LEFT JOIN a_stock.code_type 
+on code_type.code =code_netProfits.code;
+
+修改表中的表头的名称--修改表列名
+
+alter table code_type change  column code type varchar(20);
+alter table code_type change  column types code varchar(20);

@@ -1,0 +1,80 @@
+
+
+#表和字段对应要非常明确
+1.LEFT JOIN 必须大写
+
+SELECT code_netProfits.code,code_netProfits.name,code_type.type,code_netProfits.v1,code_netProfits.v2,code_netProfits.v3,code_netProfits.v4,code_netProfits.v5
+,as_fvalue_type.fl_value,as_fvalue_type.type
+FROM code_netProfits LEFT JOIN as_fvalue_type 
+on code_netProfits.code =as_fvalue_type.code;
+
+
+alter table as_fvalue_type change column  code code varchar(11);
+
+修改表中的表头的名称--修改表列名
+
+alter table table_Finances change column v1 type text;
+alter table table_Finances change  column v2 v1 text;
+alter table table_Finances change  column v3 v2 text;
+alter table table_Finances change  column v4 v3 text;
+alter table table_Finances change  column type v4 text;
+
+
+
+
+＃　改变字段的类型
+
+alter table table_Finances change column Q201901 Q201901 convert;
+alter table table_Finances change  column v2 v2 int;
+alter table table_Finances change  column v3 v3 int;
+alter table table_Finances change  column v4 v4 int;
+
+
+
+
+# 还要去掉数字字段（去掉千分号！）
+
+测试
+
+
+select name,v2 from table_Finances where name="浦发银行";
+
+select name,convert(v2,decimal(12,2)) from table_Finances where name="浦发银行";
+
+
+
+ select format(12346,2);
+输出：
+| format(12346,2) |
++-----------------+
+| 12,346.00  
+
+ select convert(12346,2);
+
+# 问题转换为同性：要剔除
+
+两种方法：
+１．replace
+
+
+Update table_Finances SET v2 =REPLACE(v2,',');
+
+
+2.直接改变字段类型，varchar convert
+
+
+
+
+
+
+
+并表查询后插入新表
+insert into table_Finances(code,name,type,Q201901,v2,v3,v4)
+SELECT code_netProfits.code,code_netProfits.name,code_type.type,code_netProfits.v1,code_netProfits.v2,code_netProfits.v3,code_netProfits.v4
+FROM a_stock.code_netProfits LEFT JOIN a_stock.code_type 
+on code_type.code =code_netProfits.code;
+
+
+#进行关键字段的查询
+
+select * from table_Finances;
