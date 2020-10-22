@@ -21,7 +21,7 @@ engine_Nas_Mons = create_engine('mysql+pymysql://root:123456@localhost:3306/a_st
 
 
 
-sql_Nas_Mons = 'select ash600036,ash000001,ash600998,ash300347,ash600999,ash601881,ash002475,ash002916,ash601155,ash000069,ash000703,ash600352,ash000338,ash600153,ash002120,ash002410,ash600406,ash000768,ash600893,ash601318,ash000938,ash603019,ash601138,ash603993,ash600019,ash000858,ash002032,ash603288,ash601899,ash002236,ash600346,ash600585,ash601766,ash601012,ash300124,ash600176,LastTime from ash300_mons  ; '
+sql_Nas_Mons = 'select * from ash300_mons  ; '
 
 ln = os.getcwd()
 
